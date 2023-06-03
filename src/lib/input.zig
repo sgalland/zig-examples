@@ -6,12 +6,6 @@ fn sanitizeData(data: []u8) []u8 {
     return if (data[data.len - 1] == '\r') return data[0 .. data.len - 1] else data;
 }
 
-// Wrapper around std.io.getStdOut().writer().print()
-pub fn print(comptime format: []const u8, args: anytype) !void {
-    const stdout = std.io.getStdOut().writer();
-    try stdout.print(format, args);
-}
-
 /// Read user string input from the command line
 pub fn readUserInput(message: []const u8) ![]u8 {
     const stdout = std.io.getStdOut().writer();
