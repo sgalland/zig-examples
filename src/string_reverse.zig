@@ -1,8 +1,8 @@
 const std = @import("std");
 
-fn findArrayMid(comptime T: type, original: []const T) usize {
+fn findArrayMid(comptime T: type, original: []const T) T {
     var mid: f32 = @intToFloat(f32, original.len) / 2;
-    return @floatToInt(usize, @round(mid));
+    return @floatToInt(T, @round(mid));
 }
 
 /// Optimally reverses a string.
@@ -25,8 +25,11 @@ pub fn main() !void {
     const args = try std.process.argsAlloc(allocator);
     defer std.process.argsFree(allocator, args);
 
-    const result = try optimizedStringReverse(allocator, "sdrawkcab os leef I");
-    std.debug.print("{s}\n", .{result});
+    const original_string = "sdrawkcab os leef I";
+    std.debug.print("original: {s}\n", .{original_string});
+
+    const result = try optimizedStringReverse(allocator, original_string);
+    std.debug.print("reversed: {s}\n", .{result});
 }
 
 test "test optimizedStringReverse" {
